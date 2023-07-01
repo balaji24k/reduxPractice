@@ -1,34 +1,19 @@
-import { createStore } from "redux";
+import {configureStore } from "@reduxjs/toolkit";
+import counterSlice from "./CounterSlice";
+import toggleSlice from "./TogglerSlice";
 
-const counterReducer = (state = { counter: 0, toggle : false, name : "shanmukha" }, action) => {
-  if (action.type === "add") {
-    return {
-			counter : state.counter + action.val,
-			toggle : state.toggle,
-			name : action.name
-		}
-  	}
-	if (action.type === "toggle") {
-		return {
-			counter : state.counter,
-			toggle : !state.toggle,
-			name : state.name
-		}
+const store = configureStore({
+	reducer : {
+		count : counterSlice.reducer,
+		toggle : toggleSlice.reducer
 	}
-
-	if (action.type === "remove") {
-		return {
-				counter : state.counter - action.val,
-				toggle : state.toggle,
-				name : action.name
-			}
-	}
-
-	return state
-};
-
-const store = createStore(counterReducer);
+});
 
 export default store;
+
+
+// const state = {counter : 0, toggle : false};
+
+// const state = {count: {counter:0}, auth: {toggle : false}}
 
 
